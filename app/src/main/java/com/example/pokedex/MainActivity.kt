@@ -63,7 +63,6 @@ class MainActivity : AppCompatActivity() {
                     tvTopAbilities.text = "Top 3 Habilidades:\n$topAbilities"
 
                 } else {
-                    // Handle error or empty state
                 }
             } catch (e: Exception) {
                 Log.e("MainActivity", "Erro ao buscar dados do dashboard", e)
@@ -100,10 +99,7 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.action_exit -> {
                 sessionManager.logout()
-                val intent = Intent(this, LoginActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                startActivity(intent)
-                finish()
+                finishAffinity()
                 true
             }
             else -> super.onOptionsItemSelected(item)

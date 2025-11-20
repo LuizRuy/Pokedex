@@ -34,9 +34,6 @@ class SessionManager(context: Context) {
         return prefs.getString(USER_ID, null)
     }
 
-    /**
-     * Clears all session data.
-     */
     fun logout() {
         val editor = prefs.edit()
         editor.clear()

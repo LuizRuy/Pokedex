@@ -28,7 +28,6 @@ interface ApiService {
     @DELETE("pokemons/{id}")
     suspend fun deletePokemon(@Path("id") id: String): Response<Unit>
 
-    // Unified Search
     @GET("pokemons/search")
     suspend fun searchPokemons(@QueryMap filters: Map<String, String>): Response<List<Pokemon>>
 }

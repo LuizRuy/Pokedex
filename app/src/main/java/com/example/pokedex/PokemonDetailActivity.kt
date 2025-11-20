@@ -123,7 +123,7 @@ class PokemonDetailActivity : AppCompatActivity() {
 
                 if (response.isSuccessful) {
                     currentPokemon = response.body()
-                    populateUI() // Refresh UI with new data
+                    populateUI()
                     toggleEditMode(false)
                     AlertDialog.Builder(this@PokemonDetailActivity).setTitle("Sucesso").setMessage("Pokémon atualizado!")
                         .setPositiveButton("OK", null).show()
