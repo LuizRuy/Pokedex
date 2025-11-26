@@ -31,7 +31,7 @@ class ListAllActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        fetchPokemons() // Fetch data every time the screen is resumed
+        fetchPokemons()
     }
 
     private fun setupRecyclerView() {

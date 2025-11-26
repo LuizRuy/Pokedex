@@ -9,6 +9,5 @@ data class Pokemon(
     val type: String,
     @SerializedName("habilidades")
     val abilities: List<String>,
-    // userId is nullable because the server does not always return it.
     val userId: String?
 )

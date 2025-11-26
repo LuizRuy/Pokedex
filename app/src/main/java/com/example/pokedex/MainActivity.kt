@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
-        supportActionBar?.title = "Pokédex" // Set a simple title
+        supportActionBar?.title = "Pokédex"
 
         tvPokemonCount = findViewById(R.id.tvPokemonCount)
         tvTopTypes = findViewById(R.id.tvTopTypes)
@@ -45,28 +45,27 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch {
             try {
                 val apiService = RetrofitInstance.getApiService(this@MainActivity)
-                val response = apiService.getPokemons()
+                val response = apiService.getDashboardData()
 
                 if (response.isSuccessful && response.body() != null) {
-                    val pokemons = response.body()!!
+                    val dashboardData = response.body()!!
 
-                    tvPokemonCount.text = "Pokémons cadastrados: ${pokemons.size}"
+                    tvPokemonCount.text = "Pokémons cadastrados: ${dashboardData.totalPokemons}"
 
-                    val topTypes = pokemons.groupingBy { it.type }.eachCount()
-                        .toList().sortedByDescending { it.second }.take(3)
-                        .joinToString("\n") { "- ${it.first} (${it.second})" }
+                    val topTypes = dashboardData.topTipos
+                        .joinToString("\n") { "- ${it.tipo} (${it.count})" }
                     tvTopTypes.text = "Top 3 Tipos:\n$topTypes"
 
-                    val topAbilities = pokemons.flatMap { it.abilities }.groupingBy { it }.eachCount()
-                        .toList().sortedByDescending { it.second }.take(3)
-                        .joinToString("\n") { "- ${it.first} (${it.second})" }
+                    val topAbilities = dashboardData.topHabilidades
+                        .joinToString("\n") { "- ${it.habilidade} (${it.count})" }
                     tvTopAbilities.text = "Top 3 Habilidades:\n$topAbilities"
 
                 } else {
-                    // Handle error or empty state
+                    Toast.makeText(this@MainActivity, "Falha ao carregar dados do dashboard", Toast.LENGTH_SHORT).show()
                 }
             } catch (e: Exception) {
                 Log.e("MainActivity", "Erro ao buscar dados do dashboard", e)
+                Toast.makeText(this@MainActivity, "Erro de conexão: ${e.message}", Toast.LENGTH_LONG).show()
             }
         }
     }

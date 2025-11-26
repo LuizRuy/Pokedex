@@ -1,5 +1,6 @@
 package com.example.pokedex.data.network
 
+import com.example.pokedex.data.model.Dashboard
 import com.example.pokedex.data.model.LoginRequest
 import com.example.pokedex.data.model.LoginResponse
 import com.example.pokedex.data.model.Pokemon
@@ -28,7 +29,9 @@ interface ApiService {
     @DELETE("pokemons/{id}")
     suspend fun deletePokemon(@Path("id") id: String): Response<Unit>
 
-    // Unified Search
     @GET("pokemons/search")
     suspend fun searchPokemons(@QueryMap filters: Map<String, String>): Response<List<Pokemon>>
+
+    @GET("pokemons/dashboard")
+    suspend fun getDashboardData () : Response<Dashboard>
 }

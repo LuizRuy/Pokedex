@@ -67,7 +67,7 @@ class PokemonDetailActivity : AppCompatActivity() {
 
                 if (response.isSuccessful && response.body() != null) {
                     currentPokemon = response.body()
-                    populateUI()
+                    fetchPokemon()
                 } else {
                     Toast.makeText(this@PokemonDetailActivity, "Falha ao buscar detalhes", Toast.LENGTH_SHORT).show()
                 }
@@ -77,7 +77,7 @@ class PokemonDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun populateUI() {
+    private fun fetchPokemon() {
         currentPokemon?.let {
             etName.setText(it.name)
             etType.setText(it.type)
@@ -123,7 +123,7 @@ class PokemonDetailActivity : AppCompatActivity() {
 
                 if (response.isSuccessful) {
                     currentPokemon = response.body()
-                    populateUI() // Refresh UI with new data
+                    fetchPokemon()
                     toggleEditMode(false)
                     AlertDialog.Builder(this@PokemonDetailActivity).setTitle("Sucesso").setMessage("Pokémon atualizado!")
                         .setPositiveButton("OK", null).show()
@@ -149,12 +149,12 @@ class PokemonDetailActivity : AppCompatActivity() {
         AlertDialog.Builder(this)
             .setTitle("Excluir Pokémon")
             .setMessage("Tem certeza que deseja excluir o ${currentPokemon?.name}?")
-            .setPositiveButton("Excluir") { _, _ -> performDelete() }
+            .setPositiveButton("Excluir") { _, _ -> deletePokemon() }
             .setNegativeButton("Cancelar", null)
             .show()
     }
 
-    private fun performDelete() {
+    private fun deletePokemon() {
         lifecycleScope.launch {
             try {
                 val apiService = RetrofitInstance.getApiService(this@PokemonDetailActivity)

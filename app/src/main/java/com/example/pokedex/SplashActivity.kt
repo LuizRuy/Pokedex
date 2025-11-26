@@ -14,18 +14,13 @@ class SplashActivity : AppCompatActivity() {
 
         Handler(Looper.getMainLooper()).postDelayed({
             val sessionManager = SessionManager(this)
-            
-            // Check if user is logged in
+
             if (sessionManager.fetchAuthToken() != null) {
-                // User is logged in, go to MainActivity
                 startActivity(Intent(this, MainActivity::class.java))
             } else {
-                // User is not logged in, go to LoginActivity
                 startActivity(Intent(this, LoginActivity::class.java))
             }
-            
-            // Finish SplashActivity so it's not in the back stack
             finish()
-        }, 3000) // 3 seconds delay
+        }, 3000)
     }
 }

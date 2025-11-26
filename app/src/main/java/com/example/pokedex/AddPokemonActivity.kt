@@ -58,7 +58,6 @@ class AddPokemonActivity : AppCompatActivity() {
                             .setPositiveButton("OK") { _, _ -> finish() }
                             .show()
                     } else {
-                        // Check for specific error code 409 (Conflict)
                         val errorMessage = if (response.code() == 409) {
                             "Já existe um Pokémon com este nome."
                         } else {
