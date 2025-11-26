@@ -30,10 +30,6 @@ class SessionManager(context: Context) {
         editor.apply()
     }
 
-    fun getUserId(): String? {
-        return prefs.getString(USER_ID, null)
-    }
-
     fun logout() {
         val editor = prefs.edit()
         editor.clear()

@@ -20,8 +20,7 @@ class SplashActivity : AppCompatActivity() {
             } else {
                 startActivity(Intent(this, LoginActivity::class.java))
             }
-
             finish()
-        }, 3000) // 3 seconds delay
+        }, 3000)
     }
 }
