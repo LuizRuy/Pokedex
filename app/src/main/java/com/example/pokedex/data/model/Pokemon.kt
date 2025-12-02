@@ -2,6 +2,9 @@ package com.example.pokedex.data.model
 
 import com.google.gson.annotations.SerializedName
 
+data class UserPokemon(
+    val name: String
+)
 data class Pokemon(
     val id: String,
     val name: String,
@@ -9,5 +12,5 @@ data class Pokemon(
     val type: String,
     @SerializedName("habilidades")
     val abilities: List<String>,
-    val userId: String?
+    val user: UserPokemon?
 )

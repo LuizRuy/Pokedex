@@ -22,6 +22,7 @@ class PokemonDetailActivity : AppCompatActivity() {
     private lateinit var etAbility1: EditText
     private lateinit var etAbility2: EditText
     private lateinit var etAbility3: EditText
+    private lateinit var etOwner: EditText
     private lateinit var btnEditSave: Button
     private lateinit var btnDelete: Button
 
@@ -43,6 +44,7 @@ class PokemonDetailActivity : AppCompatActivity() {
         etAbility1 = findViewById(R.id.etPokemonAbility1Detail)
         etAbility2 = findViewById(R.id.etPokemonAbility2Detail)
         etAbility3 = findViewById(R.id.etPokemonAbility3Detail)
+        etOwner = findViewById(R.id.etPokemonOwnerDetail)
         btnEditSave = findViewById(R.id.btnEditSave)
         btnDelete = findViewById(R.id.btnDelete)
 
@@ -84,6 +86,7 @@ class PokemonDetailActivity : AppCompatActivity() {
             etAbility1.setText(it.abilities.getOrNull(0) ?: "")
             etAbility2.setText(it.abilities.getOrNull(1) ?: "")
             etAbility3.setText(it.abilities.getOrNull(2) ?: "")
+            etOwner.setText(it.user?.name ?: "")
         }
     }
 
