@@ -44,6 +44,9 @@ class AddPokemonActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            btnSavePokemon.isEnabled = false
+            btnSavePokemon.text = "Carregando..."
+
             val pokemonPayload = PokemonPayload(name = name, type = type, abilities = abilities)
 
             lifecycleScope.launch {
@@ -76,6 +79,11 @@ class AddPokemonActivity : AppCompatActivity() {
                         .setMessage("Não foi possível conectar à API.")
                         .setPositiveButton("OK", null)
                         .show()
+                } finally {
+                    if (!isFinishing) {
+                        btnSavePokemon.isEnabled = true
+                        btnSavePokemon.text = "Salvar"
+                    }
                 }
             }
         }
